@@ -1,0 +1,18 @@
+let projectList = [];
+
+function createProject (name) {
+  let todoList = [];
+  projectList.push({ name, todoList });
+}
+
+function removeProject (name) {
+  let i = 0;
+  for (const project of projectList) {
+    if (project.name === name) {
+      projectList.splice(i, 1);
+    }
+    i++
+  }
+}
+
+export { createProject, removeProject, projectList };
