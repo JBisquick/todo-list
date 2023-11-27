@@ -1,11 +1,11 @@
 let projectList = [];
 
-function createProject (name) {
+function createProject(name) {
   let todoList = [];
   projectList.push({ name, todoList });
 }
 
-function removeProject (name) {
+function removeProject(name) {
   let i = 0;
   for (const project of projectList) {
     if (project.name === name) {

@@ -20,6 +20,10 @@ html, body {
 	border: solid black 1px;
 }
 
+.project-title {
+  display: flex;
+}
+
 .todo-list {
 	border: solid black 1px;
 }
