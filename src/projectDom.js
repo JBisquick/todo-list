@@ -11,6 +11,8 @@ function addProjectForm() {
 
 	const projectInput = document.createElement('input');
 	form.appendChild(projectInput);
+	projectInput.setAttribute('type', 'text');
+	projectInput.setAttribute('placeholder', 'Project Name');
 
 	const buttonContainer = document.createElement('div');
 	form.appendChild(buttonContainer);
@@ -19,6 +21,7 @@ function addProjectForm() {
 	buttonContainer.appendChild(add);
 	add.textContent = 'Add';
 	add.addEventListener('click', function() {
+		createProject(projectInput.value);
 		removeProjectForm();
 		projectTitle.style.display = 'flex'; 
 	});
