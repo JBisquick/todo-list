@@ -6,7 +6,6 @@ function createProject(name) {
   }
   let todoList = [];
   projectList.push({ name, todoList });
-  console.log(projectList);
 }
 
 function removeProject(name) {

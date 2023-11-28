@@ -24,6 +24,11 @@ html, body {
   display: flex;
 }
 
+.project-div {
+  display: flex;
+  justify-content: space-around;
+}
+
 .todo-list {
 	border: solid black 1px;
 }
