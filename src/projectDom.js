@@ -1,4 +1,4 @@
-import { createProject, projectList } from './project';
+import { createProject, removeProject, projectList } from './project';
 
 const projects = document.querySelector('.project-list');
 
@@ -56,6 +56,10 @@ function loadProjectList() {
 		const trash = document.createElement('div');
 		projectDiv.appendChild(trash);
 		trash.textContent = '-';
+		trash.addEventListener('click', function() {
+			removeProject(project.name);
+			loadProjectList();
+		});
 	}
 }
 
