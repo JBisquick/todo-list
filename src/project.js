@@ -18,4 +18,12 @@ function removeProject(name) {
   }
 }
 
-export { createProject, removeProject, projectList };
+function findProject(projectName) {
+  for (const project of projectList) {
+    if (project.name === projectName) {
+      return project.todoList;
+    }
+  }
+}
+
+export { createProject, removeProject, findProject, projectList };
