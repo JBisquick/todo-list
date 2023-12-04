@@ -24,7 +24,7 @@ function addProjectForm() {
 	add.addEventListener('click', function() {
 		createProject(projectInput.value);
 		removeProjectForm();
-		loadProjectList();
+		loadProjectDivs();
 		projectTitle.style.display = 'flex'; 
 	});
 
@@ -42,8 +42,8 @@ function removeProjectForm() {
 	form.remove();
 }
 
-function loadProjectList() {
-	removeProjectList();
+function loadProjectDivs() {
+	removeProjectDivs();
 	for (const project of projectList) {
 		const projectDiv = document.createElement('div');
 		projectDiv.classList.add('project-div');
@@ -52,21 +52,29 @@ function loadProjectList() {
 		const projectNameDiv = document.createElement('div');
 		projectDiv.appendChild(projectNameDiv);
 		projectNameDiv.textContent = project.name;
+    projectNameDiv.addEventListener('click', function (e) {
+      loadProjectTitle(e);
+    })
 
 		const trash = document.createElement('div');
 		projectDiv.appendChild(trash);
 		trash.textContent = '-';
 		trash.addEventListener('click', function() {
 			removeProject(project.name);
-			loadProjectList();
+			loadProjectDivs();
 		});
 	}
 }
 
-function removeProjectList() {
+function removeProjectDivs() {
 	while (projects.hasChildNodes()) {
 		projects.removeChild(projects.firstChild);
 	}
+}
+
+function loadProjectTitle(e) {
+  const todoTitle = document.querySelector('.todo-title');
+  todoTitle.textContent = e.target.textContent;
 }
 
 export { addProjectForm };
