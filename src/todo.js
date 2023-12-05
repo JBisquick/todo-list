@@ -18,5 +18,4 @@ function deleteTodo(projectTitle, name) {
   }
 }
 
-
 export { createTodo, deleteTodo };
