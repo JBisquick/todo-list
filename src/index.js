@@ -1,7 +1,6 @@
-import { createProject, projectList, findProject } from './project';
-import { addProjectForm } from './projectDom';
+import { createProject, findProject } from './project';
+import { addProjectForm, loadTodoList } from './dom';
 import { createTodo, deleteTodo } from './todo'
-import { loadTodoList } from './todoDom';
 import './styles.css';
 
 const addProject = document.querySelector('.project-title');

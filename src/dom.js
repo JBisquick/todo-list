@@ -1,4 +1,4 @@
-import { createProject, removeProject, projectList } from './project';
+import { createProject, removeProject, findProject, projectList } from './project';
 
 const projects = document.querySelector('.project-list');
 
@@ -21,7 +21,7 @@ function addProjectForm() {
 	const add = document.createElement('button');
 	buttonContainer.appendChild(add);
 	add.textContent = 'Add';
-	add.addEventListener('click', function() {
+	add.addEventListener('click', function(e) {
 		createProject(projectInput.value);
 		removeProjectForm();
 		loadProjectDivs();
@@ -54,6 +54,7 @@ function loadProjectDivs() {
 		projectNameDiv.textContent = project.name;
     projectNameDiv.addEventListener('click', function (e) {
       loadProjectTitle(e);
+			loadTodoList(findProject(e.target.textContent));
     })
 
 		const trash = document.createElement('div');
@@ -77,4 +78,29 @@ function loadProjectTitle(e) {
   todoTitle.textContent = e.target.textContent;
 }
 
-export { addProjectForm };
+
+function loadTodoList(todoList) {
+  unloadTodoList ();
+
+  const todoContent = document.querySelector('.todo-content');
+  const todoListContainer = document.createElement('div');
+  todoListContainer.classList.add('todo-list-container');
+  todoContent.appendChild(todoListContainer);
+  
+  for (const todo of todoList) {
+    const todoContainer = document.createElement('div');
+    todoContainer.classList.add('todo-container');
+    todoListContainer.appendChild(todoContainer);
+
+    const todoTitle = document.createElement('div');
+    todoTitle.textContent = todo.title;
+    todoContainer.appendChild(todoTitle);
+  }
+}
+
+function unloadTodoList() {
+  const todoList = document.querySelector('.todo-list-container');
+  todoList.remove();
+}
+
+export { addProjectForm, loadTodoList };
