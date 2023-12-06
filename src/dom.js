@@ -76,7 +76,9 @@ function removeProjectDivs() {
 
 function loadProjectTitle(e) {
   const todoTitle = document.querySelector('.todo-title');
+  const todoAdd = document.querySelector('.add-todo');
   todoTitle.textContent = e.target.textContent;
+  todoAdd.textContent = '+';
 }
 
 
@@ -115,6 +117,7 @@ function submitTodo() {
 
   createTodo(projectName, name, description, dueDate);
   loadTodoList(findProject(projectName));
+  resetTodoForm();
 }
 
 function resetTodoForm() {
@@ -123,6 +126,11 @@ function resetTodoForm() {
 	document.querySelector('#todo-name').value = '';
   document.querySelector('#todo-description').value = '';
   document.querySelector('#todo-date').value = '';
+}
+
+function addTodoForm() {
+  const todoForm = document.querySelector('.form-background');
+  todoForm.style.display = 'flex';
 }
 
 function validateTodoForm() {
@@ -143,4 +151,4 @@ function validateTodoForm() {
   }
 }
 
-export { addProjectForm, loadTodoList, submitTodo, resetTodoForm };
+export { addProjectForm, loadProjectDivs, loadTodoList, submitTodo, resetTodoForm, addTodoForm };
