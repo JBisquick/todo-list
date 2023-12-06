@@ -115,7 +115,12 @@ function submitTodo() {
 
   createTodo(projectName, name, description, dueDate);
   loadTodoList(findProject(projectName));
-  document.querySelector('#todo-name').value = '';
+}
+
+function resetTodoForm() {
+  const todoForm = document.querySelector('.form-background');
+  todoForm.style.display = 'none';
+	document.querySelector('#todo-name').value = '';
   document.querySelector('#todo-description').value = '';
   document.querySelector('#todo-date').value = '';
 }
@@ -138,4 +143,4 @@ function validateTodoForm() {
   }
 }
 
-export { addProjectForm, loadTodoList, submitTodo };
+export { addProjectForm, loadTodoList, submitTodo, resetTodoForm };
