@@ -1,11 +1,13 @@
 import { createProject, findProject } from './project';
-import { addProjectForm, loadTodoList } from './dom';
+import { addProjectForm, loadTodoList, submitTodo } from './dom';
 import { createTodo, deleteTodo } from './todo'
 import './styles.css';
 
 const addProject = document.querySelector('.project-title');
+const submitButton = document.querySelector('.submit');
 
 addProject.addEventListener('click', addProjectForm);
+submitButton.addEventListener('submit', submitTodo);
 
 createProject('bob');
 

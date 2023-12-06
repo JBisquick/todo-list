@@ -1,4 +1,5 @@
 import { createProject, removeProject, findProject, projectList } from './project';
+import { createTodo } from './todo';
 
 const projects = document.querySelector('.project-list');
 
@@ -103,4 +104,14 @@ function unloadTodoList() {
   todoList.remove();
 }
 
-export { addProjectForm, loadTodoList };
+function submitTodo() {
+  const projectName = document.querySelector('.todo-title').textContent;
+  const name = document.querySelector('#todo-name').value;
+  const description = document.querySelector('#todo-description').value;
+  const dueDate = document.querySelector('#todo-date').value;
+  createTodo(projectName, name, description, dueDate);
+  loadTodoList(findProject(projectName));
+}
+
+
+export { addProjectForm, loadTodoList, submitTodo };
