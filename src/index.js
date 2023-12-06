@@ -7,7 +7,7 @@ const addProject = document.querySelector('.project-title');
 const submitButton = document.querySelector('.submit');
 
 addProject.addEventListener('click', addProjectForm);
-submitButton.addEventListener('submit', submitTodo);
+submitButton.addEventListener('click', submitTodo);
 
 createProject('bob');
 

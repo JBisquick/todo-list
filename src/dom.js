@@ -105,13 +105,37 @@ function unloadTodoList() {
 }
 
 function submitTodo() {
-  const projectName = document.querySelector('.todo-title').textContent;
+  let projectName = document.querySelector('.todo-title').textContent;
+  let name = document.querySelector('#todo-name').value;
+  let description = document.querySelector('#todo-description').value;
+  let dueDate = document.querySelector('#todo-date').value;
+  if (validateTodoForm() === false) {
+    return;
+  }
+
+  createTodo(projectName, name, description, dueDate);
+  loadTodoList(findProject(projectName));
+  document.querySelector('#todo-name').value = '';
+  document.querySelector('#todo-description').value = '';
+  document.querySelector('#todo-date').value = '';
+}
+
+function validateTodoForm() {
   const name = document.querySelector('#todo-name').value;
   const description = document.querySelector('#todo-description').value;
   const dueDate = document.querySelector('#todo-date').value;
-  createTodo(projectName, name, description, dueDate);
-  loadTodoList(findProject(projectName));
+  if (name === '') {
+    alert('Need to fill out title.');
+    return false;
+  } else if (description === '') {
+    alert('Need to fill out description.');
+    return false;
+  } else if (dueDate === '') {
+    alert('Need to select a due date.');
+    return false;
+  } else {
+    return true;
+  }
 }
-
 
 export { addProjectForm, loadTodoList, submitTodo };
