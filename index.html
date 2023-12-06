@@ -25,22 +25,27 @@
       <div class="todo-list-container"></div>
     </div>
   </div>
-  <form class="todo-form">
-    <div>Todo</div>
-    <div>
-      <label for="todo-name">Title</label>
-      <input type="text" id="todo-name" minlength="5">
-    </div>
-    <div>
-      <label for="todo-description">Description</label>
-      <textarea id="todo-description" cols="50" rows="10"></textarea>
-    </div>
-    <div>
-      <label for="todo-date">Due Date</label>
-      <input type="date" id="todo-date">
-    </div>
-    <button type="button" class="submit">Add</button>
-  </form>
+  <div class="form-background">
+    <form class="todo-form">
+      <div>Todo</div>
+      <div>
+        <label for="todo-name">Title</label>
+        <input type="text" id="todo-name" minlength="5">
+      </div>
+      <div>
+        <label for="todo-description">Description</label>
+        <textarea id="todo-description" cols="50" rows="10"></textarea>
+      </div>
+      <div>
+        <label for="todo-date">Due Date</label>
+        <input type="date" id="todo-date">
+      </div>
+      <div class="button-container">
+        <button type="button" class="submit">Add</button>
+        <button type="button" class="cancel">Cancel</button>
+      </div>
+    </form>
+  </div>
   <script src="main.js"></script>
 </body>
 </html>
