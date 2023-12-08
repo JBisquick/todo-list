@@ -1,10 +1,16 @@
 import { findProject } from './project';
+import { format } from 'date-fns';
 
 function createTodo(projectTitle, title, description, dueDate) {
   let checked = false;
-  let important = false;
+  let importance = false;
   const project = findProject(projectTitle);
-  project.push({ title, description, dueDate, important, checked });
+  if (dueDate === '') {
+    dueDate = 'No Due Date';
+  } else {
+    format(new Date(dueDate), 'yyyy-MM-dd');
+  }
+  project.push({ title, description, dueDate, importance, checked });
 }
 
 function deleteTodo(projectTitle, name) {
@@ -18,4 +24,12 @@ function deleteTodo(projectTitle, name) {
   }
 }
 
-export { createTodo, deleteTodo };
+function changeTodoImportance(todo) {
+  if (todo.importance === false) {
+    todo.importance = true;
+  } else {
+    todo.importance = false;
+  }
+}
+
+export { createTodo, deleteTodo, changeTodoImportance };

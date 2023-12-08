@@ -33,6 +33,16 @@ html, body {
 	border: solid black 1px;
 }
 
+.todo-container {
+  display: flex;
+  align-items: center;
+}
+
+.todo-information {
+  display: flex;
+  flex-direction: column;
+}
+
 .form-background {
   bottom: 0;
   right: 0;

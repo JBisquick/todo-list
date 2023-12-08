@@ -86,18 +86,30 @@ function loadTodoList(todoList) {
   unloadTodoList ();
 
   const todoContent = document.querySelector('.todo-content');
-  const todoListContainer = document.createElement('div');
+  const todoListContainer = document.createElement('ul');
   todoListContainer.classList.add('todo-list-container');
   todoContent.appendChild(todoListContainer);
   
   for (const todo of todoList) {
-    const todoContainer = document.createElement('div');
+    const todoContainer = document.createElement('li');
     todoContainer.classList.add('todo-container');
     todoListContainer.appendChild(todoContainer);
 
+    const todoInformation = document.createElement('div');
+    todoInformation.classList.add('todo-information')
+    todoContainer.appendChild(todoInformation);
+
     const todoTitle = document.createElement('div');
     todoTitle.textContent = todo.title;
-    todoContainer.appendChild(todoTitle);
+    todoInformation.appendChild(todoTitle);
+
+    const todoDescription = document.createElement('div');
+    todoDescription.textContent = todo.description;
+    todoInformation.appendChild(todoDescription);
+
+    const dueDate = document.createElement('div');
+    dueDate.textContent = todo.dueDate;
+    todoContainer.appendChild(dueDate);
   }
 }
 
@@ -136,15 +148,11 @@ function addTodoForm() {
 function validateTodoForm() {
   const name = document.querySelector('#todo-name').value;
   const description = document.querySelector('#todo-description').value;
-  const dueDate = document.querySelector('#todo-date').value;
   if (name === '') {
     alert('Need to fill out title.');
     return false;
   } else if (description === '') {
     alert('Need to fill out description.');
-    return false;
-  } else if (dueDate === '') {
-    alert('Need to select a due date.');
     return false;
   } else {
     return true;
