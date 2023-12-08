@@ -25,4 +25,12 @@ function changeTodoImportance(todo) {
   }
 }
 
-export { createTodo, deleteTodo, changeTodoImportance };
+function changeChecked(todo) {
+  if (todo.checked === false) {
+    todo.checked = true;
+  } else {
+    todo.checked = false;
+  }
+}
+
+export { createTodo, deleteTodo, changeTodoImportance, changeChecked };
