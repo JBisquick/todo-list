@@ -21,7 +21,7 @@ function removeProject(name) {
 function findProject(projectName) {
   for (const project of projectList) {
     if (project.name === projectName) {
-      return project.todoList;
+      return project;
     }
   }
 }

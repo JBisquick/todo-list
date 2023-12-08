@@ -1,5 +1,6 @@
 import { createProject, removeProject, findProject, projectList } from './project';
-import { createTodo, changeTodoImportance } from './todo';
+import { createTodo, deleteTodo, changeTodoImportance } from './todo';
+import { format } from 'date-fns';
 import unimportant from './imgs/unimportant.png';
 import important from './imgs/important.png';
 
@@ -83,7 +84,7 @@ function loadProjectTitle(e) {
   todoAdd.textContent = '+';
 }
 
-function addTodoDom(todo) {
+function addTodoDom(project, todo) {
   const todoListContainer = document.querySelector('.todo-list-container');
 
   const todoContainer = document.createElement('li');
@@ -114,6 +115,13 @@ function addTodoDom(todo) {
   }
   todoContainer.appendChild(star);
   star.addEventListener('click', function(e) {changeImportanceDom(todo, e)});
+
+  const trash = document.createElement('div');
+  trash.textContent = '-';
+  trash.addEventListener('click', function() {
+    deleteTodoDom(project, todo, todoContainer);
+  });
+  todoContainer.appendChild(trash);
 }
 
 function changeImportanceDom(todo, e) {
@@ -125,7 +133,7 @@ function changeImportanceDom(todo, e) {
   }
 }
 
-function loadTodoList(todoList) {
+function loadTodoList(project) {
   unloadTodoList ();
 
   const todoContent = document.querySelector('.todo-content');
@@ -133,8 +141,8 @@ function loadTodoList(todoList) {
   todoListContainer.classList.add('todo-list-container');
   todoContent.appendChild(todoListContainer);
   
-  for (const todo of todoList) {
-    addTodoDom(todo);
+  for (const todo of project.todoList) {
+    addTodoDom(project, todo);
   }
 }
 
@@ -145,17 +153,21 @@ function unloadTodoList() {
 
 function submitTodo() {
   let projectName = document.querySelector('.todo-title').textContent;
-  let name = document.querySelector('#todo-name').value;
+  let title = document.querySelector('#todo-name').value;
   let description = document.querySelector('#todo-description').value;
   let dueDate = document.querySelector('#todo-date').value;
   if (validateTodoForm() === false) {
     return;
   }
-  importance = false;
-  checked = false;
-
-  createTodo(projectName, name, description, dueDate);
-  addTodoDom({ name, description, dueDate, importance, checked });
+  let importance = false;
+  let checked = false;
+  if (dueDate === '') {
+    dueDate = 'No Due Date';
+  } else {
+    format(new Date(dueDate), 'yyyy-MM-dd');
+  }
+  createTodo(projectName, title, description, dueDate);
+  addTodoDom(findProject(projectName), { title, description, dueDate, importance, checked });
   resetTodoForm();
 }
 
@@ -184,6 +196,11 @@ function validateTodoForm() {
   } else {
     return true;
   }
+}
+
+function deleteTodoDom(project, todo, todoDom) {
+  deleteTodo(project, todo.title);
+  todoDom.remove();
 }
 
 export { addProjectForm, loadProjectDivs, loadTodoList, submitTodo, resetTodoForm, addTodoForm };
