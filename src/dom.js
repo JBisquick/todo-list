@@ -212,12 +212,8 @@ function addTodoForm() {
 
 function validateTodoForm() {
   const name = document.querySelector('#todo-name').value;
-  const description = document.querySelector('#todo-description').value;
   if (name === '') {
     alert('Need to fill out title.');
-    return false;
-  } else if (description === '') {
-    alert('Need to fill out description.');
     return false;
   } else {
     return true;

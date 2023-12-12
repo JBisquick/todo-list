@@ -1,6 +1,4 @@
-import { createProject, findProject } from './project';
-import { addProjectForm, loadProjectDivs, loadTodoList, submitTodo, resetTodoForm, addTodoForm, loadAllTodos, loadTodayTodos, loadWeekTodos, loadImportantTodos } from './dom';
-import { createTodo } from './todo'
+import { addProjectForm, submitTodo, resetTodoForm, addTodoForm, loadAllTodos, loadTodayTodos, loadWeekTodos, loadImportantTodos, loadProjectDivs } from './dom';
 import './styles.css';
 
 const addProject = document.querySelector('.project-title');
@@ -21,11 +19,5 @@ today.addEventListener('click', loadTodayTodos);
 week.addEventListener('click', loadWeekTodos);
 important.addEventListener('click', loadImportantTodos);
 
-
-createProject('bob');
-
-createTodo('bob', 'Take dog to the bathroom', 'They got to go POOP', '12/12/23');
-createTodo('bob', 'Take dog to the park', 'They got to go have FUN', '12/22/23');
-
-loadTodoList(findProject('bob'));
+loadAllTodos();
 loadProjectDivs();

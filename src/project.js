@@ -1,4 +1,6 @@
-let projectList = [];
+import { saveToLocalStorage, loadLocalStorage } from './storage.js';
+
+let projectList = loadLocalStorage();
 
 function createProject(name) {
   if (name === '') {
@@ -6,6 +8,7 @@ function createProject(name) {
   }
   let todoList = [];
   projectList.push({ name, todoList });
+  saveToLocalStorage(projectList);
 }
 
 function removeProject(name) {
@@ -16,6 +19,7 @@ function removeProject(name) {
     }
     i++
   }
+  saveToLocalStorage(projectList);
 }
 
 function findProject(projectName) {
