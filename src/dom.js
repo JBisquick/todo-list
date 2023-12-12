@@ -124,22 +124,29 @@ function addTodoDom(project, todo) {
     star.src = unimportant;
   }
   todoContainer.appendChild(star);
-  star.addEventListener('click', function(e) {changeImportanceDom(todo, e)});
+  star.addEventListener('click', function(e) {
+    changeImportanceDom(todo, todoContainer, e)
+  });
 
   const trash = document.createElement('div');
   trash.textContent = '-';
   trash.addEventListener('click', function() {
-    deleteTodoDom(project, todo, todoContainer);
+    todoContainer.remove();
+    deleteTodo(project, todo.title);
   });
   todoContainer.appendChild(trash);
 }
 
-function changeImportanceDom(todo, e) {
+function changeImportanceDom(todo, container, e) {
   changeTodoImportance(todo);
   if (e.target.src === important) {
     e.target.src = unimportant;
   } else {
     e.target.src = important;
+  }
+  const todoTitle = document.querySelector('.todo-title');
+  if (todoTitle.textContent === 'Important') {
+    container.remove();
   }
 }
 
@@ -217,11 +224,6 @@ function validateTodoForm() {
   }
 }
 
-function deleteTodoDom(project, todo, todoDom) {
-  deleteTodo(project, todo.title);
-  todoDom.remove();
-}
-
 function loadAllTitle() {
   const todoTitle = document.querySelector('.todo-title');
   const todoAdd = document.querySelector('.add-todo');
@@ -265,4 +267,59 @@ function loadAllTodos() {
   }
 }
 
-export { addProjectForm, loadProjectDivs, loadTodoList, submitTodo, resetTodoForm, addTodoForm, loadAllTodos, loadTodayTitle, loadWeekTitle, loadImportantTitle };
+function loadImportantTodos() {
+  unloadTodoList();
+  loadImportantTitle();
+  const todoContent = document.querySelector('.todo-content');
+  const todoListContainer = document.createElement('ul');
+  todoListContainer.classList.add('todo-list-container');
+  todoContent.appendChild(todoListContainer);
+
+  for (const project of projectList) {
+    for (const todo of project.todoList) {
+      if (todo.importance === true) {
+        addTodoDom(project, todo);
+      }
+    }
+  }
+}
+
+function loadTodayTodos() {
+  unloadTodoList();
+  loadTodayTitle();
+  const todoContent = document.querySelector('.todo-content');
+  const todoListContainer = document.createElement('ul');
+  todoListContainer.classList.add('todo-list-container');
+  todoContent.appendChild(todoListContainer);
+
+  for (const project of projectList) {
+    for (const todo of project.todoList) {
+      const today = new Date();
+      const due = new Date(todo.dueDate);
+      const dueTimeMili = due.getTime() - today.getTime();
+      const miliInDay = 86400000;
+      if (dueTimeMili < miliInDay) {addTodoDom(project, todo)};
+    }
+  }
+}
+
+function loadWeekTodos() {
+  unloadTodoList();
+  loadWeekTitle();
+  const todoContent = document.querySelector('.todo-content');
+  const todoListContainer = document.createElement('ul');
+  todoListContainer.classList.add('todo-list-container');
+  todoContent.appendChild(todoListContainer);
+
+  for (const project of projectList) {
+    for (const todo of project.todoList) {
+      const today = new Date();
+      const due = new Date(todo.dueDate);
+      const dueTimeMili = due.getTime() - today.getTime();
+      const miliInWeek = 86400000*7;
+      if (dueTimeMili < miliInWeek) {addTodoDom(project, todo)};
+    }
+  }
+}
+
+export { addProjectForm, loadProjectDivs, loadTodoList, submitTodo, resetTodoForm, addTodoForm, loadAllTodos, loadTodayTodos, loadWeekTodos, loadImportantTodos };

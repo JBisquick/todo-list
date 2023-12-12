@@ -1,5 +1,5 @@
 import { createProject, findProject } from './project';
-import { addProjectForm, loadProjectDivs, loadTodoList, submitTodo, resetTodoForm, addTodoForm, loadAllTodos, loadTodayTitle, loadWeekTitle, loadImportantTitle } from './dom';
+import { addProjectForm, loadProjectDivs, loadTodoList, submitTodo, resetTodoForm, addTodoForm, loadAllTodos, loadTodayTodos, loadWeekTodos, loadImportantTodos } from './dom';
 import { createTodo } from './todo'
 import './styles.css';
 
@@ -17,9 +17,9 @@ submitButton.addEventListener('click', submitTodo);
 cancelButton.addEventListener('click', resetTodoForm);
 addTodo.addEventListener('click', addTodoForm)
 all.addEventListener('click', loadAllTodos);
-today.addEventListener('click', loadTodayTitle);
-week.addEventListener('click', loadWeekTitle);
-important.addEventListener('click', loadImportantTitle);
+today.addEventListener('click', loadTodayTodos);
+week.addEventListener('click', loadWeekTodos);
+important.addEventListener('click', loadImportantTodos);
 
 
 createProject('bob');
