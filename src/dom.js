@@ -1,6 +1,7 @@
 import { createProject, removeProject, findProject, projectList } from './project';
 import { createTodo, deleteTodo, changeTodoImportance, changeChecked } from './todo';
 import { format } from 'date-fns';
+import trashCan from './imgs/trash.png';
 import unimportant from './imgs/unimportant.png';
 import important from './imgs/important.png';
 
@@ -47,6 +48,7 @@ function removeProjectForm() {
 }
 
 function loadProjectDivs() {
+  const projectTitle = document.querySelector('.project-title');
 	removeProjectDivs();
 	for (const project of projectList) {
 		const projectDiv = document.createElement('div');
@@ -68,6 +70,7 @@ function loadProjectDivs() {
 			removeProject(project.name);
 			loadProjectDivs();
       loadAllTodos();
+      projectTitle.style.display = 'flex'; 
 		});
 	}
 }
@@ -92,8 +95,12 @@ function addTodoDom(project, todo) {
   todoContainer.classList.add('todo-container');
   todoListContainer.appendChild(todoContainer);
 
+  const leftDiv = document.createElement('div');
+  leftDiv.classList.add('left-todo');
+  todoContainer.appendChild(leftDiv);
+
   const checkBox = document.createElement('div');
-  todoContainer.appendChild(checkBox);
+  leftDiv.appendChild(checkBox);
   if (todo.checked === true) {
     checkBox.textContent = '+';
   } else {
@@ -103,7 +110,7 @@ function addTodoDom(project, todo) {
 
   const todoInformation = document.createElement('div');
   todoInformation.classList.add('todo-information')
-  todoContainer.appendChild(todoInformation);
+  leftDiv.appendChild(todoInformation);
 
   const todoTitle = document.createElement('div');
   todoTitle.textContent = todo.title;
@@ -113,9 +120,13 @@ function addTodoDom(project, todo) {
   todoDescription.textContent = todo.description;
   todoInformation.appendChild(todoDescription);
 
+  const rightDiv = document.createElement('div');
+  rightDiv.classList.add('right-todo');
+  todoContainer.appendChild(rightDiv);
+
   const dueDate = document.createElement('div');
   dueDate.textContent = todo.dueDate;
-  todoContainer.appendChild(dueDate);
+  rightDiv.appendChild(dueDate);
 
   const star = document.createElement('img');
   if (todo.importance === true) {
@@ -123,18 +134,18 @@ function addTodoDom(project, todo) {
   } else {
     star.src = unimportant;
   }
-  todoContainer.appendChild(star);
+  rightDiv.appendChild(star);
   star.addEventListener('click', function(e) {
     changeImportanceDom(todo, todoContainer, e)
   });
 
-  const trash = document.createElement('div');
-  trash.textContent = '-';
+  const trash = document.createElement('img');
+  trash.src = trashCan;
   trash.addEventListener('click', function() {
     todoContainer.remove();
     deleteTodo(project, todo.title);
   });
-  todoContainer.appendChild(trash);
+  rightDiv.appendChild(trash);
 }
 
 function changeImportanceDom(todo, container, e) {
