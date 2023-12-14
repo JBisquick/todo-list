@@ -18,7 +18,6 @@ function addProjectForm() {
 	form.appendChild(projectInput);
 	projectInput.setAttribute('type', 'text');
 	projectInput.setAttribute('placeholder', 'Project Name');
-	projectInput.setAttribute('maxlength', '20');
 
 	const buttonContainer = document.createElement('div');
 	form.appendChild(buttonContainer);
@@ -58,19 +57,21 @@ function loadProjectDivs() {
 		const projectNameDiv = document.createElement('div');
 		projectDiv.appendChild(projectNameDiv);
 		projectNameDiv.textContent = project.name;
-    projectNameDiv.addEventListener('click', function (e) {
-      loadProjectTitle(e);
-			loadTodoList(findProject(e.target.textContent));
+    projectDiv.addEventListener('click', function() {
+      highlightTab(projectDiv);
+      loadProjectTitle(projectNameDiv);
+			loadTodoList(findProject(projectNameDiv.textContent));
     })
 
-		const trash = document.createElement('div');
+		const trash = document.createElement('img');
 		projectDiv.appendChild(trash);
-		trash.textContent = '-';
-		trash.addEventListener('click', function() {
+		trash.src = trashCan;
+		trash.addEventListener('click', function(e) {
 			removeProject(project.name);
 			loadProjectDivs();
       loadAllTodos();
       projectTitle.style.display = 'flex'; 
+      e.stopPropagation();
 		});
 	}
 }
@@ -81,10 +82,10 @@ function removeProjectDivs() {
 	}
 }
 
-function loadProjectTitle(e) {
+function loadProjectTitle(div) {
   const todoTitle = document.querySelector('.todo-title');
   const todoAdd = document.querySelector('.add-todo');
-  todoTitle.textContent = e.target.textContent;
+  todoTitle.textContent = div.textContent;
   todoAdd.textContent = '+';
 }
 
@@ -231,37 +232,45 @@ function validateTodoForm() {
   }
 }
 
-function loadAllTitle() {
+function loadAllDoms() {
   const todoTitle = document.querySelector('.todo-title');
   const todoAdd = document.querySelector('.add-todo');
   todoTitle.textContent = 'All';
   todoAdd.textContent = '';
+  const allTab = document.querySelector('#all');
+  highlightTab(allTab);
 }
 
-function loadTodayTitle() {
+function loadTodayDoms() {
   const todoTitle = document.querySelector('.todo-title');
   const todoAdd = document.querySelector('.add-todo');
   todoTitle.textContent = 'Today';
   todoAdd.textContent = '';
+  const todayTab = document.querySelector('#today');
+  highlightTab(todayTab);
 }
 
-function loadWeekTitle() {
+function loadWeekDoms() {
   const todoTitle = document.querySelector('.todo-title');
   const todoAdd = document.querySelector('.add-todo');
   todoTitle.textContent = 'Week';
   todoAdd.textContent = '';
+  const weekTab = document.querySelector('#week');
+  highlightTab(weekTab);
 }
 
-function loadImportantTitle() {
+function loadImportantDoms() {
   const todoTitle = document.querySelector('.todo-title');
   const todoAdd = document.querySelector('.add-todo');
   todoTitle.textContent = 'Important';
   todoAdd.textContent = '';
+  const importantTab = document.querySelector('#important');
+  highlightTab(importantTab);
 }
 
 function loadAllTodos() {
   unloadTodoList();
-  loadAllTitle();
+  loadAllDoms();
   const todoContent = document.querySelector('.todo-content');
   const todoListContainer = document.createElement('ul');
   todoListContainer.classList.add('todo-list-container');
@@ -276,7 +285,7 @@ function loadAllTodos() {
 
 function loadImportantTodos() {
   unloadTodoList();
-  loadImportantTitle();
+  loadImportantDoms();
   const todoContent = document.querySelector('.todo-content');
   const todoListContainer = document.createElement('ul');
   todoListContainer.classList.add('todo-list-container');
@@ -293,7 +302,7 @@ function loadImportantTodos() {
 
 function loadTodayTodos() {
   unloadTodoList();
-  loadTodayTitle();
+  loadTodayDoms();
   const todoContent = document.querySelector('.todo-content');
   const todoListContainer = document.createElement('ul');
   todoListContainer.classList.add('todo-list-container');
@@ -312,7 +321,7 @@ function loadTodayTodos() {
 
 function loadWeekTodos() {
   unloadTodoList();
-  loadWeekTitle();
+  loadWeekDoms();
   const todoContent = document.querySelector('.todo-content');
   const todoListContainer = document.createElement('ul');
   todoListContainer.classList.add('todo-list-container');
@@ -328,5 +337,22 @@ function loadWeekTodos() {
     }
   }
 }
+
+function highlightTab(div) {
+  const projectTabs = document.querySelectorAll('.project-div');
+  const allTab = document.querySelector('#all');
+  const todayTab = document.querySelector('#today');
+  const weekTab = document.querySelector('#week');
+  const importantTab = document.querySelector('#important');
+  allTab.classList.remove('highlight');
+  todayTab.classList.remove('highlight');
+  weekTab.classList.remove('highlight');
+  importantTab.classList.remove('highlight');
+  for (const projectTab of projectTabs) {
+    projectTab.classList.remove('highlight');
+  }
+  div.classList.add('highlight');
+}
+
 
 export { addProjectForm, loadProjectDivs, loadTodoList, submitTodo, resetTodoForm, addTodoForm, loadAllTodos, loadTodayTodos, loadWeekTodos, loadImportantTodos };
