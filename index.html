@@ -7,11 +7,15 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="./aa09b72c5c301aa1673d.png">
   <title>Odin Todo List</title>
 </head>
 <body>
   <div id="content">
-    <div class="title">Odin Todo List</div>
+    <div class="title">
+      <div>Odin Todo List</div>
+      <img src="aa09b72c5c301aa1673d.png" alt="Logo">
+    </div>
     <div class="project-container">
       <div id="all">All</div>
       <div id="today">Today</div>
@@ -33,17 +37,17 @@
   </div>
   <div class="form-background">
     <form class="todo-form">
-      <div>Todo</div>
-      <div>
-        <label for="todo-name">Title*</label>
+      <div class="todo-form-title">Todo</div>
+      <div class="input-container">
+        <label for="todo-name">Title:*</label>
         <input type="text" id="todo-name" minlength="5">
       </div>
-      <div>
-        <label for="todo-description">Description</label>
+      <div class="input-container">
+        <label for="todo-description">Description:</label>
         <textarea id="todo-description" cols="50" rows="10"></textarea>
       </div>
-      <div>
-        <label for="todo-date">Due Date</label>
+      <div class="input-container">
+        <label for="todo-date">Due Date:</label>
         <input type="date" id="todo-date">
       </div>
       <div class="button-container">
