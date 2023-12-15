@@ -1,6 +1,7 @@
 import { saveToLocalStorage, loadLocalStorage } from './storage.js';
 
 let projectList = loadLocalStorage();
+saveToLocalStorage(projectList);
 
 function createProject(name) {
   if (name === '') {
