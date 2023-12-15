@@ -2,6 +2,8 @@ import { createProject, removeProject, findProject, projectList } from './projec
 import { createTodo, deleteTodo, changeTodoImportance, changeChecked } from './todo';
 import { format } from 'date-fns';
 import trashCan from './imgs/trash.png';
+import checkedBox from './imgs/checked_box.png'
+import emptyBox from './imgs/empty_box.png'
 import unimportant from './imgs/unimportant.png';
 import important from './imgs/important.png';
 
@@ -100,14 +102,15 @@ function addTodoDom(project, todo) {
   leftDiv.classList.add('left-todo');
   todoContainer.appendChild(leftDiv);
 
-  const checkBox = document.createElement('div');
+  const checkBox = document.createElement('img');
   leftDiv.appendChild(checkBox);
   if (todo.checked === true) {
-    checkBox.textContent = '+';
+    checkBox.src = checkedBox;
+    todoContainer.id = 'checked';
   } else {
-    checkBox.textContent = '-';
+    checkBox.src = emptyBox;
   }
-  checkBox.addEventListener('click', function(e) {changeCheckedDom(todo, e)});
+  checkBox.addEventListener('click', function(e) {changeCheckedDom(todo, e, todoContainer)});
 
   const todoInformation = document.createElement('div');
   todoInformation.classList.add('todo-information')
@@ -162,12 +165,14 @@ function changeImportanceDom(todo, container, e) {
   }
 }
 
-function changeCheckedDom(todo, e) {
+function changeCheckedDom(todo, e, todoContainer) {
   changeChecked(todo);
-  if (e.target.textContent === '+') {
-    e.target.textContent = '-';
+  if (e.target.src === emptyBox) {
+    e.target.src = checkedBox;
+    todoContainer.id = 'checked';
   } else {
-    e.target.textContent = '+';
+    e.target.src = emptyBox;
+    todoContainer.removeAttribute('id');
   }
 }
 

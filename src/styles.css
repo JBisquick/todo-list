@@ -19,6 +19,17 @@ html, body {
   padding: 0 0 0 0;
 }
 
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.title img {
+  width: 6rem;
+  height: 6rem;
+}
+
 #content {
   display: grid;
   grid-template-columns: minmax(250px, 1fr) 4fr;
@@ -75,14 +86,13 @@ div .project-title {
   display: flex;
   background-color: var(--grey);
   border: 2px solid var(--grey);
-  border-bottom: 2px solid black;
+  border-bottom: 2px solid rgb(32, 32,32);
   border-radius: 0;
 }
 
 div .project-title:hover {
   border: 2px solid var(--grey);
-  border-bottom: 2px solid black;
-  cursor: auto;
+  border-bottom: 2px solid rgb(32, 32,32);
 }
 
 .project-title div {
@@ -168,13 +178,16 @@ div .project-list:hover {
   overflow: hidden;
 }
 
+.todo-title {
+  overflow: hidden;
+}
+
 .todo-title-container {
   display: flex;
   flex-direction: row;
   font-size: 1.5rem;
   justify-content: center;
   gap: 15px;
-
 }
 
 .add-todo:hover, .todo-container img:hover {
@@ -212,17 +225,96 @@ div .project-list:hover {
   flex-direction: column;
   align-items: center;
   z-index: 3;
-  border: 5px solid;
+  border: 5px solid var(--applegreen);
+  border-radius: 25px;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   gap: 20px;
   padding: 40px;
-  background-color: white;
+  background-color: var(--eggshell);
 }
 
 div .highlight {
   border: 2px solid var(--applegreen);
   font-weight: 1000;
+}
+
+div .project-form {
+  display: flex;
+  background-color: var(--grey);
+  border: 0;
+  flex-direction: column;
+  margin: 0;
+}
+
+.project-form input{
+  font-size: 1.2rem;
+  padding: 2px 1px;
+  border-radius: 5px;
+}
+
+.project-form div {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: var(--grey);
+  border: 0;
+  font-size: 1.5rem;
+}
+
+.project-form div button {
+  font-size: 1rem;
+  padding: 4px 8px;
+  border-radius: 5px;
+}
+
+.project-form div button:hover,
+.button-container button:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+  transition: 0.2s;
+}
+
+div .project-form:hover {
+  border: 0;
+  cursor: auto;
+}
+
+.todo-form-title {
+  font-size: 1.7rem;
+  color: rgb(32, 32,32);
+}
+
+.input-container {
+  font-size: 1.2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.input-container div {
+  font-weight: 1000;
+}
+
+.input-container input,
+.input-container textarea {
+  font-size: 1rem;
+  border-radius: 5px;
+  padding: 2px 3px;
+}
+
+.button-container button {
+  font-size: 1rem;
+  border-radius: 5px;
+  padding: 2px 3px;
+}
+
+.button-container {
+  display: flex;
+  gap: 10px;
+}
+
+#checked {
+  background-color: rgb(100, 100, 100);
 }
